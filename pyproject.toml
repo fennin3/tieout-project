@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tieout"
+version = "0.1.0"
+description = "Single-account, single-day bank-to-ledger cash reconciliation."
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.1,<5.2",
+    "psycopg[binary]>=3.2,<4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-django>=4.9",
+    "ruff>=0.8",
+]
+
+[tool.setuptools.packages.find]
+include = ["config*", "recon*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "DJ"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+testpaths = ["tests"]
